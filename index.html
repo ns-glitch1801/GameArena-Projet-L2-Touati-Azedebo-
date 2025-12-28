@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameArena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css?v=11.9">
+    <link rel="stylesheet" href="css/components.css?v=11.9">
+</head>
+
+<body>
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ Paramètres</h3>
+                <button onclick="closeSettings()" class="close-btn">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label>Clé API Cortex IA</label>
+                    <select id="api-provider">
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="openai">OpenAI</option>
+                    </select>
+                    <input type="password" id="api-key" placeholder="Entrez votre clé API">
+                    <button onclick="saveApiKey()" class="btn-primary">Enregistrer</button>
+                    <p class="help-text">La clé API est nécessaire pour que Cortex IA fonctionne</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="notification-modal hidden">
+        <div class="notification-content">
+            <div class="notification-icon" id="notif-icon"></div>
+            <h2 id="notif-title"></h2>
+            <p id="notif-message"></p>
+            <button onclick="closeNotification()" class="notif-btn">Continuer</button>
+        </div>
+    </div>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🔗</div>
+
+            </div>
+            <nav>
+                <div class="nav-item active" onclick="navigateTo('home')">🏠 Accueil</div>
+                <div class="nav-item" onclick="navigateTo('morpion')">⭕ Morpion</div>
+                <div class="nav-item" onclick="navigateTo('chess')">♟️ Échecs</div>
+                <div class="nav-item" onclick="navigateTo('connect4')">🔴 Puissance 4</div>
+                <div class="nav-item" onclick="navigateTo('tankwar')">🎮 Tank War</div>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="openSettings()" class="settings-btn">⚙️ Paramètres</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div style="font-size: 0.75rem; opacity: 0.3; letter-spacing: 1px; font-weight: 300;">
+                    Fait par Anas Touati et Rafael Azedebo
+                </div>
+            </header>
+
+            <!-- Home View -->
+            <div id="view-home" class="view active">
+                <div class="content-area dashboard-layout">
+
+                    <!-- HERO SECTION -->
+                    <div class="hero-banner">
+                        <div class="hero-content">
+                            <h1 class="glitch-title" data-text="GAME ARENA">GAME ARENA</h1>
+                            <p class="hero-subtitle">SYSTEME CORTEX • <span class="online-status"
+                                    id="cortex-status">OFFLINE 🔴</span>
+                            </p>
+                            <div class="hero-stats">
+                                <span class="stat-pill" id="hero-rank">🏆 RANK: NOV 1</span>
+                                <span class="stat-pill" id="hero-elo">⚡ ELO: 1200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IMMERSIVE GAMES GRID -->
+                    <div class="games-grid-pro">
+                        <!-- CHESS CARD -->
+                        <div class="game-card-pro chess-bg" onclick="navigateTo('chess')">
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <div class="card-icon">♟️</div>
+                                <h2>CORTEX CHESS</h2>
+                                <div class="specs-mini">
+                                    <span>🧠 GEN-AI</span>
+                                    <span>📊 ELO RANKED</span>
+                                </div>
+                            </div>
+                            <!-- Hover Detail -->
+                            <div class="card-reveal">
+                                <p>Affrontez CORTEX, le Boss Final.<br>3 Phases : Calibrage, Duel, et
+                                    Finale.<br>Arrogance Maximale.</p>
+                                <div class="action-row">
+                                    <button class="play-btn">DÉFIER CORTEX</button>
+                                    <button class="reset-btn" onclick="resetGameProgress(event, 'chess')"
+                                        title="Réinitialiser Rang">↻</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TIC TAC TOE -->
+                        <div class="game-card-pro ttt-bg" onclick="navigateTo('morpion')">
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <div class="card-icon">🧠</div>
+                                <h2>MORPION</h2>
+                                <div class="specs-mini">
+                                    <span>🛡️ MINIMAX</span>
+                                    <span>♾️ SOLVED</span>
+                                </div>
+                            </div>
+                            <div class="card-reveal">
+                                <p>Algorithme Minimax pur.<br>Résolution mathématique parfaite.<br>Impossible de gagner.
+                                </p>
+                                <div class="action-row">
+                                    <button class="play-btn">DÉFIER L'ALGO</button>
+                                    <button class="reset-btn" onclick="resetGameProgress(event, 'morpion')"
+                                        title="Réinitialiser Rang">↻</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CONNECT 4 -->
+                        <div class="game-card-pro c4-bg" onclick="navigateTo('puissance4')">
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <div class="card-icon">🔴</div>
+                                <h2>PUISSANCE 4</h2>
+                                <div class="specs-mini">
+                                    <span>🌲 ALPHA-BETA</span>
+                                    <span>🎯 GRAVITY</span>
+                                </div>
+                            </div>
+                            <div class="card-reveal">
+                                <p>Anticipation et profondeur stratégique (Depth 6).</p>
+                                <div class="action-row">
+                                    <button class="play-btn">JOUER</button>
+                                    <button class="reset-btn" onclick="resetGameProgress(event, 'connect4')"
+                                        title="Réinitialiser Rang">↻</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TANK WAR -->
+                        <div class="game-card-pro tank-bg" onclick="navigateTo('tankwar')">
+                            <div class="card-overlay"></div>
+                            <div class="card-content">
+                                <div class="card-icon">🚀</div>
+                                <h2>TANK WAR</h2>
+                                <div class="specs-mini">
+                                    <span>🎮 UNITY 6</span>
+                                    <span>💥 ACTION</span>
+                                </div>
+                            </div>
+                            <div class="card-reveal">
+                                <p>Combat cinétique en temps réel. Moteur Physique.</p>
+                                <button class="play-btn">JOUER</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Views -->
+            <div id="view-morpion" class="view">
+                <div class="game-container-vertical">
+                    <div class="status-header">
+                        <div class="status-main">
+                            <p id="morpion-status" class="status-text">Votre tour (X)</p>
+                        </div>
+                        <div class="status-secondary">
+                            <div class="level-mini">
+                                <span id="morpion-level">Niveau 1/5</span>
+                                <div class="progress-bar-mini">
+                                    <div class="progress-fill" id="morpion-progress" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-area-centered">
+                        <div id="morpion-board"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-chess" class="view">
+                <div class="game-container-vertical">
+                    <h2 class="match-test-label">MATCH TEST</h2>
+                    <div class="status-header">
+                        <div class="status-main">
+                            <p id="chess-status" class="status-text">Votre tour (Blancs)</p>
+                        </div>
+                        <div class="status-secondary">
+                            <div class="level-mini">
+                                <span id="chess-level">Niveau 1/5</span>
+                                <div class="progress-bar-mini">
+                                    <div class="progress-fill" id="chess-progress" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-area-centered">
+                        <div id="chess-board"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connect 4 View -->
+            <div id="view-connect4" class="view">
+                <div class="game-container-vertical">
+                    <div class="status-header">
+                        <div class="status-main">
+                            <p id="connect4-status" class="status-text">Votre tour (Rouge)</p>
+                        </div>
+                        <div class="status-secondary">
+                            <div class="level-mini">
+                                <span id="connect4-level">Niveau 1/5</span>
+                                <div class="progress-bar-mini">
+                                    <div class="progress-fill" id="connect4-progress" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-area-centered">
+                        <div id="connect4-board"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- TANK WAR (Unity WebGL Container) -->
+            <div id="view-tankwar" class="view">
+                <div class="unity-wrapper" style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+                    <!-- Custom Toolbar -->
+                    <div class="unity-toolbar">
+                        <div class="unity-brand">TANK WAR (Unity WebGL)</div>
+                        <div class="unity-controls">
+                            <span class="unity-status-led">Running</span>
+                            <button onclick="document.getElementById('tankwar-frame').contentWindow.location.reload()"
+                                class="unity-btn">↻</button>
+                            <button onclick="navigateTo('home')" class="unity-btn close">✕</button>
+                        </div>
+                    </div>
+
+                    <!-- Iframe Container -->
+                    <div class="unity-container" style="flex: 1; overflow: hidden; position: relative;">
+                        <!-- Manual Launch Overlay -->
+                        <div id="tankwar-overlay"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 14, 23, 0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
+                            <h2
+                                style="color: #fff; margin-bottom: 20px; font-family: 'Inter', sans-serif; text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);">
+                                PRÊT AU COMBAT ?</h2>
+                            <button onclick="launchTankWar()" style="
+                                padding: 16px 48px; 
+                                font-size: 1.2rem; 
+                                background: linear-gradient(135deg, #00f2ff 0%, #0078ff 100%); 
+                                border: none; 
+                                border-radius: 8px; 
+                                cursor: pointer; 
+                                font-weight: 800; 
+                                color: #000;
+                                box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+                                transition: transform 0.2s;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
+                            " onmouseover="this.style.transform='scale(1.05)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                                LANCER LE JEU 🚀
+                            </button>
+                        </div>
+
+                        <iframe id="tankwar-frame" src="" style="width: 100%; height: 100%; border: none;"
+                            allow="fullscreen; autoplay; gamepads"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="chat-panel">
+            <div class="chat-header">
+                <h3>CORTEX IA</h3>
+                <div class="status-indicator"></div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="system-msg">🔒 Configurez une clé API dans les paramètres pour activer Cortex IA
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Message..." disabled>
+                <button onclick="sendChat()" id="chat-send" disabled>➤</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="js/vendor/chess.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>

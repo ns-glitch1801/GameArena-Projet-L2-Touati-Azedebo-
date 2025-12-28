@@ -1,0 +1,45 @@
+:root {
+    /* Colors - Premium Dark Theme */
+    --bg-primary: #0a0e17;
+    /* Very dark blue/black */
+    --bg-secondary: #111b2d;
+    /* Slightly lighter blue */
+    --bg-glass: rgba(17, 27, 45, 0.7);
+    /* Glassmorphism base */
+
+    --accent-primary: #00f2ff;
+    /* Cyan Neon */
+    --accent-secondary: #7000ff;
+    /* Purple Neon */
+    --accent-success: #00ff9d;
+    /* Green Neon */
+    --accent-danger: #ff0055;
+    /* Red Neon */
+
+    --text-primary: #ffffff;
+    --text-secondary: #a0a8b8;
+    --text-muted: #5c677d;
+
+    /* Typography */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Outfit', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+
+    /* Effects */
+    --shadow-glow: 0 0 20px rgba(0, 242, 255, 0.15);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
