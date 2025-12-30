@@ -23,11 +23,14 @@ GameArena est une plateforme de jeux web interactive qui permet de jouer contre 
 
 ## 🚀 Comment Lancer le Projet
 
+> **⚠️ IMPORTANT** : Si vous téléchargez le projet depuis GitHub en ZIP, **EXTRAYEZ D'ABORD LE ZIP** ! Ne lancez pas le serveur depuis le fichier ZIP compressé, sinon vous aurez des erreurs 404.
+
 ### Méthode 1 : Lancement Rapide (Recommandé)
 
-1. **Double-cliquez** sur le fichier `START_SERVER.bat`
-2. Une fenêtre de terminal s'ouvrira et **le navigateur s'ouvrira automatiquement** sur la plateforme
-3. Profitez de la plateforme ! 🎮
+1. **Extrayez le fichier ZIP** (si téléchargé depuis GitHub) dans un dossier de votre choix
+2. **Double-cliquez** sur le fichier `START_SERVER.bat`
+3. Une fenêtre de terminal s'ouvrira et **le navigateur s'ouvrira automatiquement** sur la plateforme
+4. Profitez de la plateforme ! 🎮
 
 > **Note** : Le navigateur s'ouvre automatiquement sur `http://localhost:8082/index.html`
 
